@@ -1,4 +1,6 @@
-const serverurl = 'http://localhost:8080/chat/';
+//const serverurl = 'http://localhost:8080/chat/';
+
+const serverurl = 'https://api.bolstart.com/bolchat/chat/';
 
 var request = require("request");
 const express = require('express');
