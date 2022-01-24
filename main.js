@@ -14,6 +14,8 @@ const io = require('socket.io')(server,
     }
 );
 
+var port = process.env.PORT || 3000
+
 var users = [];
 
 var useringroups = [];
@@ -59,6 +61,6 @@ io.on('connection', (socket) => {
 
 });
 
-server.listen(3000, ()=> {
-    console.log("Started 3000");
+server.listen(port, ()=> {
+    console.log("Started "+port);
 });
