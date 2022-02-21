@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
   socket.on('sendresponcetogroup', async (data)=>{
     for(var i = 0; i< data.receiver.length; i++){
       io.to(users[data.receiver[i]]).emit("getMessageFromSender", data);
-      io.to(users[data.receiver[i]]).emit("getHomeData", data);
+      io.to(users1[data.receiver[i]]).emit("getHomeData", data);
     }
   })
 
