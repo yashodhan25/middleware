@@ -12,6 +12,7 @@ const io = require('socket.io')(server,
 var port = process.env.PORT || 3000
 
 var users = [];
+var users1 = [];
 
 io.on('connection', (socket) => {
 
@@ -19,15 +20,28 @@ io.on('connection', (socket) => {
     users[userId] = socket.id;
   });
 
+  socket.on("connected_All", function (userId1) {
+    users1[userId1] = socket.id;
+  });
+
+  socket.on('trigger', (data) => {
+    io.to(users1[data]).emit("getHomeData", data);
+  });
+
   socket.on('sendresponce', async (data)=>{
     io.to(users[data.receiver]).emit("getMessage", data);
+    io.to(users1[data.receiver]).emit("getHomeData", data);
   })
 
   socket.on('sendresponcetogroup', async (data)=>{
     for(var i = 0; i< data.receiver.length; i++){
       io.to(users[data.receiver[i]]).emit("getMessageFromSender", data);
+      io.to(users[data.receiver]).emit("getHomeData", data);
     }
   })
+
+  socket.on('disconnect', function() {
+  });
 
 });
 
