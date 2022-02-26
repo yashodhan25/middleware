@@ -40,6 +40,10 @@ io.on('connection', (socket) => {
     }
   })
 
+  socket.on('seen', async (email)=>{
+    io.to(users[email]).emit("status", email);
+  })
+
   socket.on('disconnect', function() {
   });
 
