@@ -24,6 +24,10 @@ io.on('connection', (socket) => {
     users1[userId1] = socket.id;
   });
 
+  socket.on('myMessage', (data) => {
+    socket.emit("selfMessage", data);
+  });
+
   socket.on('trigger', (data) => {
     io.to(users1[data]).emit("getHomeData", data);
   });
