@@ -13,6 +13,7 @@ var port = process.env.PORT || 3000
 
 var users = [];
 var users1 = [];
+var users2 = [];
 
 io.on('connection', (socket) => {
 
@@ -30,6 +31,11 @@ io.on('connection', (socket) => {
 
   socket.on('trigger', (data) => {
     io.to(users1[data]).emit("getHomeData", data);
+    io.to(users2[data]).emit("alert", data);
+  });
+
+  socket.on("connected_All1", function (userId) {
+    users2[userId] = socket.id;
   });
 
   socket.on('sendresponce', async (data)=>{
