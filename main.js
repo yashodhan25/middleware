@@ -31,6 +31,9 @@ io.on('connection', (socket) => {
 
   socket.on('trigger', (data) => {
     io.to(users1[data]).emit("getHomeData", data);
+  });
+
+  socket.on('trigger1', (data) => {
     io.to(users2[data]).emit("alert", data);
   });
 
